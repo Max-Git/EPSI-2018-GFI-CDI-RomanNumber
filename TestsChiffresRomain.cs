@@ -20,18 +20,56 @@ namespace EPSI_2018_GFI_CDI_RomanNumber
             Assert.Equal("II", convertisseur.convertir(2));
             
         }
+        [Fact]
+        public void Quand_On_entre_4_on_repond_IV()
+        {
+            Convertisseur convertisseur = new Convertisseur();
+            Assert.Equal("IV", convertisseur.convertir(4));
+            
+        }
+        [Fact]
+        public void Quand_On_entre_5_on_repond_V()
+        {
+            Convertisseur convertisseur = new Convertisseur();
+            Assert.Equal("V", convertisseur.convertir(5));
+            
+        }
+        [Fact]
+        public void Quand_On_entre_9_on_repond_IX()
+        {
+            Convertisseur convertisseur = new Convertisseur();
+            Assert.Equal("IX", convertisseur.convertir(9));
+            
+        }
     }
 
     internal class Convertisseur
     {
         internal string convertir(int chiffreArabe)
         {
-            if (chiffreArabe == 1)
-                return "I";
-            if (chiffreArabe == 2)
-                return "II";
+            string chiffreRomain = "";
+            
+            const string I = "I";
+            const string V = "V";
+            const string X = "X";
 
-            return "Rome";
+            if (chiffreArabe <= 3)
+            {
+                for (int i = 0; i < chiffreArabe; i++)
+                {
+                    chiffreRomain += I;
+                }
+            }else if(chiffreArabe == 4)
+            {
+                chiffreRomain = I + V;
+            }
+            else if(chiffreArabe == 5){
+                chiffreRomain = V;
+            }
+            else{
+                chiffreRomain = I + X;
+            }
+            return chiffreRomain;
         }
     }
 }
