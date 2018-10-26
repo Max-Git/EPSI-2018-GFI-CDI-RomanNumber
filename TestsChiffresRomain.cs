@@ -6,41 +6,20 @@ namespace EPSI_2018_GFI_CDI_RomanNumber
     public class UnitTest1
     {
         [Fact]
-        public void Quand_On_entre_1_on_repond_I()
+        public void Quand_on_entre_un_tableau_de_chiffres_arabe_de_1_à_10_on_repond_avec_un_tableau_de_chiffres_romains_de_I_à_X()
         {
             Convertisseur convertisseur = new Convertisseur();
-            Assert.Equal("I", convertisseur.convertir(1));
+            string[] chiffresArabes = new string[] {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};
+            string[] chiffresRomains = new string[] {"I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"};
+            for (int i = 0; i < chiffresArabes.Length; i++)
+            {
+                Assert.Equal(chiffresRomains[i], convertisseur.convertir(int.Parse(chiffresArabes[i])));
+            }
+            
+            
             
         }
 
-        [Fact]
-        public void Quand_On_entre_2_on_repond_II()
-        {
-            Convertisseur convertisseur = new Convertisseur();
-            Assert.Equal("II", convertisseur.convertir(2));
-            
-        }
-        [Fact]
-        public void Quand_On_entre_4_on_repond_IV()
-        {
-            Convertisseur convertisseur = new Convertisseur();
-            Assert.Equal("IV", convertisseur.convertir(4));
-            
-        }
-        [Fact]
-        public void Quand_On_entre_5_on_repond_V()
-        {
-            Convertisseur convertisseur = new Convertisseur();
-            Assert.Equal("V", convertisseur.convertir(5));
-            
-        }
-        [Fact]
-        public void Quand_On_entre_9_on_repond_IX()
-        {
-            Convertisseur convertisseur = new Convertisseur();
-            Assert.Equal("IX", convertisseur.convertir(9));
-            
-        }
     }
 
     internal class Convertisseur
@@ -66,8 +45,18 @@ namespace EPSI_2018_GFI_CDI_RomanNumber
             else if(chiffreArabe == 5){
                 chiffreRomain = V;
             }
-            else{
+            else if(chiffreArabe >= 6 && chiffreArabe <= 8){
+                chiffreRomain = V;
+                for (int i = 0; i < chiffreArabe-5; i++)
+                {
+                    chiffreRomain += I; 
+                }
+            }
+            else if (chiffreArabe == 9){
                 chiffreRomain = I + X;
+            }
+            else{
+                chiffreRomain = X;
             }
             return chiffreRomain;
         }
